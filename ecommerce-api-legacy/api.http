@@ -1,31 +1,46 @@
 @baseUrl = http://localhost:3000
 
-### Checkout - sucesso
+### Health
+GET {{baseUrl}}/health
+
+### Checkout - sucesso (cartão começando com 4)
 POST {{baseUrl}}/api/checkout
 Content-Type: application/json
 
 {
-  "usr": "Guilherme",
-  "eml": "gui@fullcycle.com.br",
-  "pwd": "senhaforte",
-  "c_id": 2,
+  "name": "Guilherme",
+  "email": "gui@fullcycle.com.br",
+  "password": "senhaforte",
+  "courseId": 2,
   "card": "4111222233334444"
 }
 
-### Checkout - pagamento recusado
+### Checkout - retro-compat (payload legado com usr/eml/pwd/c_id)
 POST {{baseUrl}}/api/checkout
 Content-Type: application/json
 
 {
-  "usr": "João",
-  "eml": "joao@teste.com",
-  "pwd": "123",
+  "usr": "Maria",
+  "eml": "maria@fullcycle.com.br",
+  "pwd": "outra-senha",
   "c_id": 1,
+  "card": "4111222233334444"
+}
+
+### Checkout - pagamento recusado (cartão não começa com 4)
+POST {{baseUrl}}/api/checkout
+Content-Type: application/json
+
+{
+  "name": "João",
+  "email": "joao@teste.com",
+  "password": "123",
+  "courseId": 1,
   "card": "5111222233334444"
 }
 
 ### Relatório financeiro administrativo
 GET {{baseUrl}}/api/admin/financial-report
 
-### Deletar usuário
-DELETE {{baseUrl}}/api/users/1
+### Deletar usuário (cascade)
+DELETE {{baseUrl}}/api/users/2

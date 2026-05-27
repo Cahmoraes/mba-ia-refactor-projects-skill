@@ -1,5 +1,7 @@
 """Script para popular o banco com dados iniciais"""
-from app import app, db
+from app import create_app
+from database import db
+app = create_app()
 from models.task import Task
 from models.user import User
 from models.category import Category
